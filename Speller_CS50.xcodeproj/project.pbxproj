@@ -6,10 +6,15 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXFileReference section */
+		135F032B217BB4C60039A79D /* Speller_cwsehn-cs50-2017-x-pset5 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Speller_cwsehn-cs50-2017-x-pset5"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		135F0324217BB4B70039A79D = {
 			isa = PBXGroup;
 			children = (
+				135F032B217BB4C60039A79D /* Speller_cwsehn-cs50-2017-x-pset5 */,
 			);
 			sourceTree = "<group>";
 		};

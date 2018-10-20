@@ -1,0 +1,53 @@
+0.  pneumonoultramicroscopicsilicovolcanoconiosis is a 45 letter word that represents the maximum length word that our program
+    will be responsible to account for.  According to Merriam-Webster's Medical Dictionary, pneumonoultramicroscopicsilicovolcanoconiosis 
+    is a pneumoconiosis caused by inhalation of very fine silicate or quartz dust.
+    
+1.  getrusage() is a function which stands for get resource usage. It utilizes a struct called rusage to calculate the sum of resources
+    used in a computer program's calling process.  The rusage struct contains two timeval structs which are used to express time in nano-seconds
+    spent executing a command, either by the user CPU or the system CPU.
+    
+2.  The sixteen total members of an rusage struct include 14 of type long integer along with the two timeval struct types.
+
+3.  The second argument of the getrusage() function requires a pointer to a previously defined rusage struct, in this case either the 
+    'before' or 'after' rusage struct(s).  By passing those pointers to the calculate() function, the specific timevalue members utilized
+    in the function are accessible ...no need for copying of values...
+    
+4.  The 'text' argument passed into the speller program at the command line is passed to the fopen() function as an 'r' for file to be read,
+    whose return value is assigned to a FILE type pointer named fp.  The pointer fp is used as the argument to the fgetc() function 
+    which reads the text one character at a time returning each result to the int variable c, which is used to initiate a 'for loop.'
+    As long as the fgetc(fp) call does not return EOF (end of file), c is passed through the conditions of the loop and finally 
+    incremented by another call to fgetc(fp).
+    
+    The first set of conditional checks determine whether or not the value of c corresponds with an ASCII value of an alphabetic char
+    ...isalpha(c), ... or perhaps an apostrophe, provided that said apostrophe does not occur at index 0, which would be the beginning of a new word, 
+    indicating such character's usage as a single quote mark.  Passing that first test, c is assigned to the previously initiated index value
+    of a character array named word...and the value of index is incremented by one.  Next, the value of index is evaluated against a 
+    predefined LENGTH value (45) to ensure the limit of the character array is not surpassed and thus the acceptable word length is maintained. 
+    Should the LENGTH limit be reached, fgetc(fp) is repeatedly called until EOF is returned or a non-alphabetic char is reached at which time 
+    the while loop is ended and index is reset to 0.
+    
+    Should the value of current variable c be numeric (isdigit(c)) rather than alphabetic, a while loop similar to the LENGTH-limit while loop
+    is initiated to "runout" the current string, again through repeated calls to fgetc(fp) until EOF or, in this case, until a non alpha-numeric
+    character is reached.....at which time said while loop is ended and index is reset to 0 to begin a new word.
+    
+    Finally, when a character assigned to c is read that is neither alphabetic, apostrophic nor numeric, provided the value of index is currently
+    greater than 0, the null character is assigned to the word array at the current index value thus creating a string.  At such time,
+    a counter variable 'words' is incremented and the current word array is passed to the check() function, which is itself 'checked'
+    for performance by surrounding calls to the getrusage() function. The check() function searches for the existance of the current word[array]
+    in whatever dictionary was loaded at compile time of the program,.....If the current word array does not exist in the currently employed 
+    dictionary a boolean variable named misspelled is assigned a value of 'true', the misspelled word is passed to the printf() function, 
+    and a counter of misspellings is incremented by one. The value of index is then reset to 0 and the for loop marches on to the next 
+    character/word in the text....
+    
+    Upon completion of the for loop, the fclose(fp) function is called to close the text file, the size() function is called and checked 
+    for performance, the unload() function is called and checked for performance.....and a set of reported results are sent to printf()
+    for examination.... 
+    
+    
+5.  From the manual description of fscanf(): ..."If processing of a directive fails, no further input is read, and fscanf() returns."
+    Matching format conditions with the fscanf() function can be inflexible at best....especially when considering the length of the texts
+    this program is being expected to check......also the for loop described previously conveniently allows for the placement of 
+    the \0 character at the end of each char word[] providing consistency for the check() function....
+    
+    
+6.  The declaration of constant variables allows the compiler to store the values as read-only memory which is beneficial to performance.
